@@ -1,7 +1,7 @@
 {
-  "name": "Kilometer1 Zeiterfassung",
-  "short_name": "Kilometer1",
-  "description": "Arbeitszeiterfassung mit Wochenlimit",
+  "name": "Zeiterfassung · Kilometer1, Schule und KitaBlick",
+  "short_name": "Arbeitszeit",
+  "description": "Zeiterfassung für Kilometer1, Schule und KitaBlick",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

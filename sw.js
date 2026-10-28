@@ -1,6 +1,6 @@
 'use strict';
-const CACHE = 'kilometer1-shell-20261028-msal-1';
-const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './cloud.js', './vendor/msal-browser.min.js'];
+const CACHE = 'kilometer1-shell-20261028-sync-2-1-clock';
+const ASSETS = ['./', './index.html', './manifest.webmanifest', './favicon.svg', './icon-192.png', './icon-512.png', './cloud.js', './sync-core.js', './sync.js', './vendor/msal-browser.min.js'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
 });

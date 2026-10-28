@@ -12,6 +12,7 @@
     $('cloudTest').disabled = busy || !account;
     $('cloudLogout').disabled = busy || !account;
     $('cloudAccount').textContent = account ? `Angemeldet: ${account.username || account.name || 'Microsoft-Konto'}` : 'Nicht angemeldet';
+    window.dispatchEvent(new Event('k1-cloud-ready'));
   }
   function errorText(error) {
     const code = error.errorCode || error.code;
@@ -91,6 +92,24 @@
     }
     state('Verbindungstest erfolgreich: geschrieben, identisch zurückgelesen und Testdatei gelöscht. Keine Zeitdaten übertragen. Automatische Synchronisierung bleibt aus.');
   });
+  window.K1Cloud = {
+    account: () => busy ? null : client?.getActiveAccount(),
+    lock() {
+      if (busy) throw Error('Ein Microsoft-Vorgang läuft bereits.');
+      busy = true; controls();
+      return () => { busy = false; controls(); };
+    },
+    graph,
+    async token() {
+      try { return (await client.acquireTokenSilent({ scopes, account: client.getActiveAccount() })).accessToken; }
+      catch (error) {
+        if (error instanceof msal.InteractionRequiredAuthError) {
+          await client.acquireTokenRedirect({ scopes, account: client.getActiveAccount() }); return null;
+        }
+        throw error;
+      }
+    }
+  };
   (async () => {
     controls();
     if (location.origin + location.pathname !== REDIRECT) {
