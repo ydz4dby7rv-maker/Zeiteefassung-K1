@@ -1,5 +1,5 @@
 'use strict';
-const CACHE = 'kilometer1-shell-20261028-overview-2-2';
+const CACHE = 'kilometer1-shell-20261028-sections-2-4';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './favicon.svg', './icon-192.png', './icon-512.png', './cloud.js', './sync-core.js', './sync.js', './vendor/msal-browser.min.js'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
